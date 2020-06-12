@@ -7,9 +7,12 @@ library(elevatr)
 library(spatialEco)
 #load a shapefile
 sh <- shapefile('input/soil_map/Soils.shp')
+#extract salina map
 salina <- sh[sh$DOMSOL=='Salina',]
+#plot areas with no Salina
 plot(sh[!sh$DOMSOL=='Salina',], col='blue')
-plot(sh[sh$DOMSOL=='Salina',], add=TRUE, col='red')
+#plot only Salina areas 
+plot(sh[sh$DOMSOL=='Salina',], col='red')
 #get elevation data (9=~175m grids)
 elev <- get_elev_raster(salina, prj = projection(salina), z = 10, clip = "locations")
 #mask for the study area
