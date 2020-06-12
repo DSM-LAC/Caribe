@@ -1,3 +1,7 @@
+# goal number 1 to get everything ready for DSM in R
+
+setwd("~/Downloads/St. Lucia Soils Info/working_folder")
+
 #load a library
 library(raster)
 library(RStoolbox)
@@ -7,6 +11,8 @@ library(elevatr)
 library(spatialEco)
 #load a shapefile
 sh <- shapefile('input/soil_map/Soils.shp')
+#first step get the soil data into R
+
 #extract salina map
 salina <- sh[sh$DOMSOL=='Salina',]
 #plot areas with no Salina
@@ -44,6 +50,8 @@ train_no_sal <- data.frame(data.frame(extract(predictors, pts_covs), pts_covs@co
 
 train_no_sal$target <- 0 
 train_sal$target <- 1
+
+###goal n1 to have a regressiong matrix
 
 reg_mat <- rbind(train_sal, train_no_sal)
 
