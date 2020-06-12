@@ -64,7 +64,7 @@ x <- reg_mat[9:12]
 #train a model applied to feature extraction
 set.seed(7)
 # define the control using a random forest selection function
-control <- rfeControl(functions=rfFuncs, method="cv", number=5, repeats=5)
+control <- rfeControl(functions=rfFuncs, method="repeatedcv", number=5, repeats=5)
 #parallel
 library(doMC)
 registerDoMC(3)
@@ -88,3 +88,6 @@ lim <- getData('GADM', country='LC', level=1)
 lim <- spTransform(lim, CRS(projection(prediction)))
 #plot lim
 plot(lim, add=TRUE)
+#save the map is a raster file 
+writeRaster(prediction_trans, file='output/my_prediction_map_v0_0612.tif')
+
